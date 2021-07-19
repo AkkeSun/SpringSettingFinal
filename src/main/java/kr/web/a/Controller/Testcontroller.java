@@ -1,6 +1,5 @@
 package kr.web.a.Controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.web.a.Service.TestService;
 import kr.web.a.Vo.TestVo;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 public class Testcontroller {
 	
