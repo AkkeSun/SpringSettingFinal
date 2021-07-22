@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>DB Connection Success</h1>
+<h1>Make Json Success</h1>
+${json }
+<br><br>
+${json.a }
+<br>
+${json.a[0] }
+<br>
+${json.a[0].gender }
+<br>
 </body>
 </html>
