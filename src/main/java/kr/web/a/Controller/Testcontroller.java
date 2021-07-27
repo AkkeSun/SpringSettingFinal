@@ -160,4 +160,14 @@ public class Testcontroller {
 		log.info(javaList+"");
 		return "test4";
 	}
+	
+	// --------------------------ajax done 테스트 ------------------------------
+	@ResponseBody
+	@GetMapping("/T6")
+	public String doneTest() {
+	log.info("t6");
+		return "success";
+	
+	}
+	
 }
