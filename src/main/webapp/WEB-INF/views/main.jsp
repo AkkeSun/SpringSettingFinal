@@ -12,5 +12,6 @@
 <input type='button' value='Make JSON' onclick="location.href='/test/T2'">
 <input type='button' value='LOAD JSON AT JAVA' onclick="location.href='/test/T3'">
 <input type='button' value='LOAD JSON AT JS' onclick="location.href='/test/T4'">
+<input type='button' value='JS TEST' onclick="location.href='/test/T6'">
 </body>
 </html>

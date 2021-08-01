@@ -5,6 +5,8 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -42,5 +44,10 @@
    		<beans:property name="uploadTempDir" value='upload'/>
 	</beans:bean>
 	
+	<!-- jsonView 설정(ModelAndView를 리턴하기 위함 -->
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"> 
+		<beans:property name="order" value="1"></beans:property>
+	</beans:bean> 
 	
 </beans:beans>

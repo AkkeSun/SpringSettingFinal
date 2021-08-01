@@ -12,33 +12,6 @@
 
 <script>
 $(function(){
-/*
-var callback =
-	$.ajax({
-		url:'/test/T6'
-	})
-	//success
-	.done( (data) => {
-		alert(data);
-	})
-	//error
-	.fail( (data) => {
-		alert('fail');
-	})
-callback;
-*/
-
-var callback =
-	$.ajax({
-		url:'/test/T6'
-	});
-
-callback.done( (data) => {alert(data)} );
-	
-	
-	
-});
-
 
 
 

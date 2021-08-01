@@ -3,6 +3,7 @@ package kr.web.a.Controller;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.web.a.Service.TestService;
 import kr.web.a.Vo.TestVo;
@@ -161,13 +163,23 @@ public class Testcontroller {
 		return "test4";
 	}
 	
-	// --------------------------ajax done 테스트 ------------------------------
-	@ResponseBody
-	@GetMapping("/T6")
-	public String doneTest() {
-	log.info("t6");
-		return "success";
+	// --------------------------ajax test ------------------------------
 	
+	@GetMapping("/T6")
+	public String ajaxTest() {
+	log.info("t6");
+		return "test5";
+	}
+	
+	@ResponseBody
+	@PostMapping("/T7")
+	public ModelAndView ajaxTest2(@RequestParam Map<Object, Object> paramMap) throws Exception{
+		log.info("t7");
+		ModelAndView mv = new ModelAndView("jsonView"); // 인자 :이동하고자 하는 곳
+		mv.addObject("key1", "test1");
+		mv.addObject("key2", "test2");
+		
+		return mv;
 	}
 	
 }

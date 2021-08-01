@@ -133,6 +133,23 @@
 		    <version>2.11.1</version>
 		</dependency>
 		
+		<!-- jsonView : ModelAndView ajax return-->
+		<dependency>        
+		    <groupId>net.sf.json-lib</groupId>        
+		    <artifactId>json-lib</artifactId>        
+		    <version>2.4</version>        
+		    <classifier>jdk15</classifier>    
+		</dependency>
+		
+		<!-- jsonView : ModelAndView ajax return-->
+		<dependency> 
+		    <groupId>org.codehaus.jackson</groupId> 
+		    <artifactId>jackson-mapper-asl</artifactId> 
+		    <version>1.6.4</version> 
+		</dependency>
+
+
+		
 		<!-- annotaion 오류 해결 -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
@@ -168,6 +185,8 @@
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1</version>
 		</dependency>
+		
+		
 		
 		<!-- spring 유틸 추가 -->
 		<dependency>
