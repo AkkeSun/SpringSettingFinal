@@ -10,12 +10,6 @@
 <body>
 <h1>DB Connection Success</h1>
 
-<script>
-$(function(){
 
-
-
-
-</script>
 </body>
 </html>

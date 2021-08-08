@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.annotation.Resource;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,6 +17,8 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +32,8 @@ import kr.web.a.Service.TestService;
 import kr.web.a.Vo.TestVo;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping(value="/test")
+@PropertySource({"classpath:/properties/test.properties"}) // 빈생성
 public class Testcontroller {
 	
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -35,14 +41,32 @@ public class Testcontroller {
 	@Autowired
 	TestService tService;
 	
+	
+	@Value("${name}")
+	String name;
+	
+	@Resource(name="xmlProperties")
+	Properties prop;
+	
 	//-------------------- DB에서 값 꺼내기 ---------------------------------
 	@GetMapping("/T1")
-	public String makeJson() {
+	public String makeJson(Model model) throws Exception {
 		
-		List<TestVo> list = tService.test1();
-		for (TestVo testVo : list) 
+		List<TestVo> oracleList = (List<TestVo>) tService.selectList(null, "T.test1", "oracle");
+		List<HashMap<String, String>> mariaList = (List<HashMap<String, String>>) tService.selectList(null, "mariaDB.test1", "maria");
+		
+		log.info("oracleDB List");
+		for (TestVo testVo : oracleList) 
 			log.info(testVo.toString());
-			
+		
+		log.info("mariaDB List");
+		for (HashMap<String, String> map : mariaList) {
+			log.info(map+"");
+		}
+		
+		System.out.println(name);
+		System.out.println(prop.getProperty("age"));
+		
 		return "test1";
 	}
 	
@@ -99,7 +123,8 @@ public class Testcontroller {
         
         // JSON -> String
         String jsonString = masterJson.toString();
-        
+        System.out.println(jsonString);
+  
         // 파일 생성
         /* 
          java.io.FileNotFoundException: C:\jsonTest.json (액세스가 거부되었습니다) 
@@ -107,7 +132,7 @@ public class Testcontroller {
          */
         try {
         	 
-    		FileWriter file = new FileWriter("C:\\jsonTest.json");
+    		FileWriter file = new FileWriter("C:/jsonTest.json");
     		file.write(jsonString); // JSON String 객채
     		file.flush();
     		file.close();
@@ -174,9 +199,10 @@ public class Testcontroller {
 	@ResponseBody
 	@PostMapping("/T7")
 	public ModelAndView ajaxTest2(@RequestParam Map<Object, Object> paramMap) throws Exception{
-		log.info("t7");
+
+		String test1 = paramMap.get("d1")+" "+paramMap.get("d2");
 		ModelAndView mv = new ModelAndView("jsonView"); // 인자 :이동하고자 하는 곳
-		mv.addObject("key1", "test1");
+		mv.addObject("key1", test1);
 		mv.addObject("key2", "test2");
 		
 		return mv;

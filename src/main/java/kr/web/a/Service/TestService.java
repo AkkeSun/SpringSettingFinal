@@ -1,5 +1,6 @@
 package kr.web.a.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class TestService {
 	@Autowired
 	TestDao dao;
 	
-	public List<TestVo> test1() {
-		return dao.test1();
+	public List<?> selectList(HashMap<String, Object> param, String namespace, String DB) throws Exception {
+		return dao.selectList(param, namespace, DB);
 	}
 
 }

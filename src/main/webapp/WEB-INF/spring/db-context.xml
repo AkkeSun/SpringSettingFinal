@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- //////////////////// properties bean 생성 /////////////////-->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value ="classpath:/properties/jdbc.properties" />
+	</bean>
+
+	<!-- ///////////////////// Oracle DB ///////////////////////// -->
+	<bean id="oracleDB" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${oracle.driverClassName}"/>
+		<property name="url" value="${oracle.url}"/>
+		<property name="username" value="${oracle.username}"/>
+		<property name="password" value="${oracle.password}"/>
+	</bean>
+	
+   <bean id="oracleSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="oracleDB" />
+      <property name="configLocation" value="classpath:/mybatis-config.xml" />
+      <property name="mapperLocations" value="classpath:/mappers/oracleDB/*.xml" />
+   </bean>
+   
+   <bean id="oracleSql" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="oracleSqlSessionFactory"/>
+   </bean>
+   
+
+   
+	<!-- ////////////////////// maria DB ///////////////////////// -->
+	<bean id="mariaDB" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${maria.driverClassName}"/>
+		<property name="url" value="${maria.url}"/>
+		<property name="username" value="${maria.username}"/>
+		<property name="password" value="${maria.password}"/>
+	</bean>
+	
+   <bean id="mariaSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="mariaDB" />
+      <property name="configLocation" value="classpath:/mybatis-config.xml" />
+      <property name="mapperLocations" value="classpath:/mappers/mariaDB/*.xml" />
+   </bean>
+   
+   <bean id="mariaSql" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="mariaSqlSessionFactory"/>
+   </bean>
+   
+   
+   	<!-- ////////////////////// 트랜젝션 설정 ///////////////////////// -->
+   <bean id="oracleTransaction" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    		<property name="dataSource" ref="oracleDB"></property>
+   </bean>
+   <bean id="mariaTransaction" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    		<property name="dataSource" ref="mariaDB"></property>
+   </bean>
+   
+   <tx:annotation-driven transaction-manager="oracleTransaction"/>
+   <tx:annotation-driven transaction-manager="mariaTransaction"/>
+
+</beans>

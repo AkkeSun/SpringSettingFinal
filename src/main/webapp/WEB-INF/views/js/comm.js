@@ -1,15 +1,16 @@
+let ajaxcomm = (goUrl, data, dataType, type) => {
 	
-	let ajaxComm = (goUrl, data, dataType, Type) => {
+	ajaxData = ""; 
+	let result = false;
+ 	if(dataType == "") dataType = 'json';
+ 	if(type == "" ) type='post';
+	
+	return $.ajax({
+						url:goUrl,
+				    	data:data,
+				    	datatype:dataType,
+						type:type,
+						async:false
+					});
 
-		if(data == "") data = "";
-  		if(dataType == "") dataType = 'json';
-  		if(Type == "" ) Type='post';
-
-		$.ajax({
-			url=goUrl,
-	    	data=data,
-	    	datatype=dataType,
-			type=type
-		});
-	}	
-
+}

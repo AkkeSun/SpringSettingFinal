@@ -50,4 +50,17 @@
 		<beans:property name="order" value="1"></beans:property>
 	</beans:bean> 
 	
+	<!-- 인터셉터 셋팅 -->
+	<interceptors>
+	   <interceptor> 
+	      <!--적용받을 컨트롤러-->
+	      <mapping path="/**"/> 
+	      <!--예외처리-->
+	      <exclude-mapping path="/home.do"/>
+	      <!-- 인터셉터 빈 등록-->
+	      <beans:bean id="intercept1" class="kr.web.a.interceptor.InterceptorExam"/>
+	    </interceptor>
+	 </interceptors>
+	
+	
 </beans:beans>

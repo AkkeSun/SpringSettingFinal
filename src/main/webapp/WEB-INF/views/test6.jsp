@@ -9,22 +9,9 @@
  <title>Insert title here</title>
 </head>
 <body>
-<h1>ajax Test</h1>
-
-<script>
-$(function(){
-	
-	let data = {};
-	data.d1 = 'val1';
-	data.d2 = 'val2';
-	
-	let callback = ajaxcomm('/test/T7', data, "", "");
-	callback.done( (data) => alert(data.key1) );
-
-})
-
-
-
-</script>
+<h1>Bean Test</h1>
+<h3>${val1 }</h3>
+<h3>${val2 }</h3>
+<h3>${val3 }</h3>
 </body>
 </html>
